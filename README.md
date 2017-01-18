@@ -1,6 +1,6 @@
 # skim.py
 
-Skim.py 
+Skim.py takes filenames in your current working directory as command line arguments and displays in return the classes and functions used in the file. 
 
 ```python
 class Foo(object):
