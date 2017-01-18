@@ -59,6 +59,13 @@ def process_files(filename):
     matches= get_matches(contents)    
     return (matches, filename, len(max(matches, key=len)))
 
+def determine_longest_matched_line(results):
+    """Results is a list of tuples: (match_list1, 'filename1.py', longest_line_in_match)"""
+    
+    if len(results) == 1:
+        return results[0][2]
+    return max(results, key=lambda x: x[2])[2]
+
 def main():
     """Process every file name given in sys.argv[1:]"""
 
@@ -68,7 +75,7 @@ def main():
     if not results:
         return
 
-    longest = max(results, key=lambda x: x[2])[2]
+    longest = determine_longest_matched_line(results)
     for result in results:
         print_matches(result[0], result[1], longest)
 
