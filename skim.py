@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import sys
 import os
 import re
@@ -29,8 +30,8 @@ def read_file_contents(filename):
     try:
         with open(filename, 'r') as f:
             content = f.readlines()
-    except EnvironmentError:
-        raise "Couldn't find {} in current working directory.".format(filename)
+    except EnvironmentError as e:
+        raise e
     
     return content
 
@@ -44,7 +45,6 @@ def main():
     results = []
     for arg in sys.argv[1:]:
         files = process_files(arg)
-        print('ihio')
         results.append(process_files(arg))
     if not results:
         return
