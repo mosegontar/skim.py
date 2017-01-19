@@ -20,4 +20,10 @@ Example:
 
 ## Installation
 
-`pip install skim.py` 
+`> pip install skim.py` 
+
+or to install  development version:
+
+    > git clone https://github.com/mosegontar/skim.py.git`
+    > cd skim.py
+    > pip install -e .
