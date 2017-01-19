@@ -24,6 +24,6 @@ Example:
 
 or to install  development version:
 
-`> git clone https://github.com/mosegontar/skim.py.git`
-`> cd skim.py`
-`> pip install -e .`
+    > git clone https://github.com/mosegontar/skim.py.git
+    > cd skim.py
+    > pip install -e .
