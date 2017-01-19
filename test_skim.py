@@ -1,6 +1,6 @@
 import os
 import unittest
-import skim
+from skim import skim
 
 
 TEST_CODE1 = """
