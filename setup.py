@@ -5,14 +5,10 @@ try:
 except ImportError:
     from distutils.core import setup
 
-with open('README.md') as f:
-    readme = f.read()
-
 setup(
     name='skim.py',
-    version='0.1.0',
+    version='0.1.2',
     description='Skim python files and display python classes and functions used',
-    long_description=readme,
     author='Alexander Gontar',
     author_email='mosegontar@gmail.com',
     url='https://github.com/mosegontar/skim.py.git',
