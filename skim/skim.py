@@ -71,12 +71,12 @@ def print_results(results):
         matches = result[0] 
         filename = result[1]
 
-    print(filename.center(length, '-'))
-    print
-    for line in matches:
-        print(line)
-    print
-    print(filename.center(length, '-'))    
+        print(filename.center(length, '-'))
+        print
+        for line in matches:
+            print(line)
+        print
+        print(filename.center(length, '-'))    
 
 def run():
     """Process every file name given in sys.argv[1:]"""
@@ -84,11 +84,11 @@ def run():
     matches = []
     for arg in sys.argv[1:]:
         matches.append(process_files(arg))
-    
     if not matches:
         return
 
     results = [match for match in matches if match]
+
     if results:
         print_results(results)
     else:
