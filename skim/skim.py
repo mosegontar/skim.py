@@ -15,16 +15,6 @@ class Foo(object):
 def bar(arg):
 """
 
-def print_matches(matches, filename, length):
-    """Prints all class/def line matches to stdout"""
-
-    print(filename.center(length, '-'))
-    print
-    for line in matches:
-        print(line)
-    print
-    print(filename.center(length, '-'))
-
 def check_regex(line):
     """Check via regex if line is a class or function definition"""
 
@@ -36,7 +26,6 @@ def check_regex(line):
 
 def get_matches(contents):
     """Returns list of class/def line matches for given file"""
-
     matches = [check_regex(line) for line in contents if check_regex(line)]
     return matches
 
@@ -46,9 +35,11 @@ def read_file_contents(filename):
     try:
         with open(filename, 'r') as f:
             content = f.readlines()
+    except IOError:
+        return
     except EnvironmentError as e:
         raise e
-    
+
     return content
 
 def process_files(filename):
@@ -56,7 +47,13 @@ def process_files(filename):
     ([class/def line matches], filename, longest line in matches list)"""
 
     contents = read_file_contents(filename)
-    matches= get_matches(contents)    
+    if not contents:
+        return
+        
+    matches= get_matches(contents) 
+    if not matches or not contents:
+        return
+
     return (matches, filename, len(max(matches, key=len)))
 
 def determine_longest_matched_line(results):
@@ -66,18 +63,36 @@ def determine_longest_matched_line(results):
         return results[0][2]
     return max(results, key=lambda x: x[2])[2]
 
+def print_results(results):
+    """Prints all class/def line matches to stdout"""
+
+    length = determine_longest_matched_line(results)
+    for result in results:
+        matches = result[0] 
+        filename = result[1]
+
+    print(filename.center(length, '-'))
+    print
+    for line in matches:
+        print(line)
+    print
+    print(filename.center(length, '-'))    
+
 def run():
     """Process every file name given in sys.argv[1:]"""
 
-    results = []
+    matches = []
     for arg in sys.argv[1:]:
-        results.append(process_files(arg))
-    if not results:
+        matches.append(process_files(arg))
+    
+    if not matches:
         return
 
-    longest = determine_longest_matched_line(results)
-    for result in results:
-        print_matches(result[0], result[1], longest)
+    results = [match for match in matches if match]
+    if results:
+        print_results(results)
+    else:
+        print('No python classes or defintions found in these files.')
 
 if __name__ == '__main__':
     run()
