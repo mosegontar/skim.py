@@ -7,7 +7,7 @@ except ImportError:
 
 setup(
     name='skim.py',
-    version='0.1.3',
+    version='0.1.5',
     description='Skim python files and display python classes and functions used',
     author='Alexander Gontar',
     author_email='mosegontar@gmail.com',

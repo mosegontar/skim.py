@@ -6,7 +6,7 @@ import re
 """
 Skim.py
 
-Skim python files and return organized list of classes and functions used. 
+Skim python files and return organized list of classes and functions used.
 Indentation used in the original file is preserved:
 
 class Foo(object):
@@ -43,14 +43,14 @@ def read_file_contents(filename):
     return content
 
 def process_files(filename):
-    """Read file contents, return tuple of 
+    """Read file contents, return tuple of
     ([class/def line matches], filename, longest line in matches list)"""
 
     contents = read_file_contents(filename)
     if not contents:
         return
-        
-    matches= get_matches(contents) 
+
+    matches= get_matches(contents)
     if not matches or not contents:
         return
 
@@ -58,7 +58,7 @@ def process_files(filename):
 
 def determine_longest_matched_line(results):
     """Results is a list of tuples: (match_list1, 'filename1.py', longest_line_in_match)"""
-    
+
     if len(results) == 1:
         return results[0][2]
     return max(results, key=lambda x: x[2])[2]
@@ -68,7 +68,7 @@ def print_results(results):
 
     length = determine_longest_matched_line(results)
     for result in results:
-        matches = result[0] 
+        matches = result[0]
         filename = result[1]
 
         print(filename.center(length, '-'))
@@ -76,7 +76,7 @@ def print_results(results):
         for line in matches:
             print(line)
         print
-        print(filename.center(length, '-'))    
+        print(filename.center(length, '-'))
 
 def run():
     """Process every file name given in sys.argv[1:]"""
